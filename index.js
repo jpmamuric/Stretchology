@@ -15,6 +15,7 @@ mongoose.connect(config.mongoURI, {
 
 const app = express();
 
+app.use(bodyParser.raw({ type: '*/*' }));
 app.use(bodyParser.json());
 app.use(cookieSession({ maxAge: 30 * 24 * 60 * 60 * 1000, keys: [config.cookieKey] }));
 app.use(passport.initialize());

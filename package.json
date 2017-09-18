@@ -12,7 +12,8 @@
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "npm run start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "webhook": "ngrok http 5000",
+    "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run webhook\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "JP Mamuric",
