@@ -1,0 +1,12 @@
+.booking_container {
+  margin: 10px;
+}
+
+.booking_input_text {
+  font-size: 20px;
+  background-color: #fff;
+}
+
+.booking_btn_submit {
+ background-color:#90CAF9;
+}

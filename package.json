@@ -1,0 +1,33 @@
+{
+  "name": "stretchology-server",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "engines": {
+    "node": "8.5.0",
+    "npm": "5.4.1"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "JP Mamuric",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "concurrently": "^3.5.0",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^1.3.1",
+    "express": "^4.15.4",
+    "lodash": "^4.17.4",
+    "mongoose": "^4.11.11",
+    "nodemon": "^1.12.0",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^1.0.0",
+    "stripe": "^5.0.0"
+  }
+}
