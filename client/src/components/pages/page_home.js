@@ -2,7 +2,8 @@ import React          from 'react';
 import { connect }    from 'react-redux';
 
 import './pages.css';
-import HomeNewMember  from '../home/New_Member.js';
+// import HomeNewMember  from '../home/New_Member.js';
+import TestPage       from '../map/Leaflet';
 import HomeReturningMember from '../home/Returning_Member.js';
 
 
@@ -12,7 +13,7 @@ const HomePage = ({ user }) => {
       {
         user
         ? <HomeReturningMember />
-        : <HomeNewMember />
+        : <TestPage />
       }
     </div>
   )

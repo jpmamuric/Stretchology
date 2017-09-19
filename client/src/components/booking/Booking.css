@@ -1,6 +1,6 @@
-
-
 .booking_container {
+  position: absolute;
+  z-index: 200;
   margin: 10px;
   justify-content: center;
   align-items: center;
@@ -23,8 +23,7 @@
 
 .booking_btn_submit {
   cursor: pointer;
-  font-size: 1.2em;
-  width: 50;
+  font-size: 1em;
   padding: 10px 30px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;

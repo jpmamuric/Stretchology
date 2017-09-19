@@ -29,6 +29,7 @@ class BookingForm2 extends Component {
             type='text'
             value={cityName}
             placeholder='Enter City'
+            onFocus={()=>console.log('focused')}
             onChange={e=>cityNameInputChange(e.target.value.toLowerCase())}/>
           <button type='submit' className='booking_btn_submit'>Search</button>
 

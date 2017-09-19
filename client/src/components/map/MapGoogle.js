@@ -5,12 +5,15 @@ import { Link } from 'react-router';
 
 import * as actions from '../../actions/contractors';
 import '../../index.css';
+import './Map.css';
 import arrow from '../../images/back.png'
 
+import Drawer from 'material-ui/Drawer';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/social/group';
 
 class Google_Map extends Component {
+  state = { open: false }
   componentDidMount(){
     console.log('---componentDidMount---')
     console.log(this.props)
@@ -48,7 +51,55 @@ class Google_Map extends Component {
     }
   }
 
+  handleOnClick(){
+    this.setState({open: !this.state.open});
+  }
 
+  renderButton() {
+    const { list } = this.props;
+    if(!list) {
+      return null;
+    }
+    else {
+      return (
+        <FloatingActionButton
+          onClick={()=>this.handleOnClick()}
+          className='btn_stretchologist_list'>
+          <ContentAdd />
+        </FloatingActionButton>
+      )
+    }
+  }
+
+  renderList(){
+    const { list } =this.props;
+    if(!list || list.length === 0) {
+      return <div>no stretchologist in the area</div>
+    } else {
+      return (
+        <div className='contractor_list_container'>
+          <div>
+            <h3> Nearby </h3>
+          </div>
+          <div className='flex_me contractor_list'>
+            {
+              list.map( person => {
+                const { email } = person.obj;
+                return (
+                  <div
+                    className='contractor_list_item'
+                    key={email}>
+                    {email}
+                  </div>
+                )
+              })
+            }
+          </div>
+        </div>
+      )
+    }
+
+  }
 
   render(){
     if (!this.props.geocode){
@@ -64,16 +115,22 @@ class Google_Map extends Component {
             <button
               className='btn_stretchologist box_shadow'
               onClick={coordinates=>findContractorsNearby({ coordinates:location })}>
-              <Link to='/'>
-                <img src={arrow}/>
+              <Link to='/' onClick={()=>this.props.resetContractorList()}>
+                <img src={arrow} alt='back arrow'/>
               </Link>
               Find Stretchologist
             </button>
           </div>
 
-          <FloatingActionButton className='btn_stretchologist_list'>
-            <ContentAdd />
-          </FloatingActionButton>
+          { this.renderButton() }
+          <Drawer
+            width={250}
+            docked={false}
+            openSecondary={true}
+            onRequestChange={()=>this.handleOnClick()}
+            open={this.state.open} >
+            { this.renderList() }
+          </Drawer>
         </div>
       );
     }

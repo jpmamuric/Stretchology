@@ -14,7 +14,8 @@ export const findGeolocation = ({ cityName }) => dispatch => {
   .then(res => {
     dispatch({ type: types.FETCH_GEOLOCATION, payload: res.data.results });
     dispatch({ type: types.FETCH_GEOLOCATION_SUCCESS });
-    browserHistory.push('/booking');
+    dispatch({ type: types.RESET_CONTRACTOR_LIST });
+    browserHistory.push('/');
   })
   .catch(err => dispatch({ type: types.FETCH_GEOLOCATION, payload: err }));
 
@@ -23,6 +24,12 @@ export const findGeolocation = ({ cityName }) => dispatch => {
 export const findContractorsNearby = ({ coordinates }) => dispatch => {
   const { lat, lng } = coordinates;
   axios.get(`/api/contractors?lng=${lng}&lat=${lat}`)
-    .then(res => dispatch({ type: types.FETCH_NEARBY_CONTRACTORS, payload: res.data }))
+    .then(res => {
+      dispatch({ type: types.FETCH_NEARBY_CONTRACTORS, payload: res.data })
+    })
     .catch(err => console.log(err));
+}
+
+export const resetContractorList = () => dispatch => {
+  dispatch({ type: types.RESET_CONTRACTOR_LIST });
 }
