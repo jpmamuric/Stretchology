@@ -1,5 +1,9 @@
+
+
 .booking_container {
   margin: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .booking_input_text {
@@ -7,6 +11,23 @@
   background-color: #fff;
 }
 
+.booking_search_input {
+  width: 100%;
+  max-width: 320px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  font-size: 1.2em;
+  padding-left: 10px;
+  border: none;
+}
+
 .booking_btn_submit {
+  cursor: pointer;
+  font-size: 1.2em;
+  width: 50;
+  padding: 10px 30px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: none;
  background-color:#90CAF9;
 }

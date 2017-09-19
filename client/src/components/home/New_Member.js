@@ -8,7 +8,6 @@ import Booking from '../booking/BookingForm2'
 const NewMember = () => {
   return (
     <div>
-      Welcome, Interested in Joining?
       <Booking />
     </div>
   );

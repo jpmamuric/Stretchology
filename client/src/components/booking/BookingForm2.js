@@ -19,9 +19,13 @@ class BookingForm2 extends Component {
   render(){
     const { cityNameInputChange, cityName } = this.props;
     return (
-      <form onSubmit={e=>this.handleOnSubmit(e)} autoComplete={cityName} >
-        <div className='booking_container flex_me'>
+      <form
+        className='booking_container'
+        onSubmit={e=>this.handleOnSubmit(e)}
+        autoComplete={cityName} >
+        <div className='flex_me'>
           <input
+            className='booking_search_input'
             type='text'
             value={cityName}
             placeholder='Enter City'

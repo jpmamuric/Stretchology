@@ -19,3 +19,10 @@ export const findGeolocation = ({ cityName }) => dispatch => {
   .catch(err => dispatch({ type: types.FETCH_GEOLOCATION, payload: err }));
 
 }
+
+export const findContractorsNearby = ({ coordinates }) => dispatch => {
+  const { lat, lng } = coordinates;
+  axios.get(`/api/contractors?lng=${lng}&lat=${lat}`)
+    .then(res => dispatch({ type: types.FETCH_NEARBY_CONTRACTORS, payload: res.data }))
+    .catch(err => console.log(err));
+}
