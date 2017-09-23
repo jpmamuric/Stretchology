@@ -7,9 +7,17 @@ const PointSchema = new Schema({
 });
 
 const ContractorSchema = new Schema({
-  email: { type: String, required: true , unique: true },
-  driving: { type: Boolean, default: false },
-  geometry: PointSchema
+  type: { type: String , default: 'Feature'},
+  geometry: PointSchema,
+  properties: {
+    firstname: { type: String, required: true },
+    lastname: { type: String, required: true},
+    phone: { type: String, required:true },
+    email: { type: String, required: true, unique: true },
+    password: {type: String, required: true },
+    driving: { type: Boolean, default: false },
+    createdAt: { type: Date, default: Date.now }
+  }
 });
 
 mongoose.model('contractors', ContractorSchema);

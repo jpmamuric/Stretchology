@@ -10,6 +10,12 @@ module.exports = {
     .catch(next);
   },
 
+  all(req, res, next){
+    Contractor.find({})
+    .then(contractor => res.status(200).send(contractor))
+    .catch(next);
+  },
+
   nearby(req, res, next) {
     const { lng, lat } = req.query;
     Contractor.geoNear(
