@@ -2,8 +2,6 @@ import axios from 'axios';
 import { browserHistory } from 'react-router';
 import * as types from './types'
 
-export const cityNameInputChange  = text => ({ type: types.CITY_NAME_INPUT_CHANGE, payload: text });
-
 export const findGeolocation = ({ cityName }) => dispatch => {
   axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
     params: {
@@ -18,7 +16,6 @@ export const findGeolocation = ({ cityName }) => dispatch => {
     browserHistory.push('/');
   })
   .catch(err => dispatch({ type: types.FETCH_GEOLOCATION, payload: err }));
-
 }
 
 export const findContractorsNearby = ({ coordinates }) => dispatch => {
@@ -32,4 +29,21 @@ export const findContractorsNearby = ({ coordinates }) => dispatch => {
 
 export const resetContractorList = () => dispatch => {
   dispatch({ type: types.RESET_CONTRACTOR_LIST });
+}
+
+export const getCurrentLocation = () => dispatch => {
+  const getPosition = function (options) {
+    return new Promise(function (resolve, reject) {
+      navigator.geolocation.getCurrentPosition(resolve, reject, options);
+    });
+  }
+
+  getPosition()
+    .then((position) => {
+      console.log(position)
+        dispatch({ type: types.FETCH_CURRENT_LOCATION, payload: position });
+    })
+    .catch((err) => {
+      console.error(err.message);
+    });
 }
