@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect }          from 'react-redux';
 
 import * as actions from '../../../actions/contractors';
+import SearchBox    from '../searchbox/SearchBox';
 import './Map.css';
 
 class MapContainer extends Component {
@@ -11,10 +12,6 @@ class MapContainer extends Component {
   }
 
   renderMap(){
-    if(!this.props.currentLocation) {
-      return <div>loading...</div>
-    }
-
     const { latitude, longitude } = this.props.currentLocation.coords;
     const latlng = new google.maps.LatLng(latitude, longitude);
 
@@ -26,12 +23,15 @@ class MapContainer extends Component {
       streetViewControl: false,
       zoomControl: false
     });
+
+    this.props.findContractorsNearby({ latitude, longitude })
   }
 
   render(){
     return (
       <div>
         <div id='map'/>
+        <SearchBox />
       </div>
     )
   }
