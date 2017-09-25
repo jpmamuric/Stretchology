@@ -75,6 +75,9 @@ class Nav extends Component {
       default:
         return (
           <div>
+            <Link
+              className='sidebar_link' to='/booking' onClick={this.handleClose}>Book a Session
+            </Link>
             <div onClick={this.handleClose}>
               <StripePayments />
             </div>
@@ -97,6 +100,7 @@ class Nav extends Component {
 
         {/* Cannot call setState until binding to constructor */}
         <Drawer
+          className='drawer'
           docked={false}
           width={300}
           open={this.state.open}

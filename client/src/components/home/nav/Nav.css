@@ -1,11 +1,12 @@
 .navbar_container {
   position: relative;
-  z-index: 200;
+  z-index: 300;
 }
 
 .navbar_title h1 {
   flex: none;
 }
+
 
 .sidebar {
   flex-direction: column;
