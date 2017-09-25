@@ -21,7 +21,9 @@ const muiTheme = getMuiTheme({
 class App extends Component {
   componentDidMount(){
     this.props.fetchUser();
+    this.props.getCurrentLocation();
   }
+
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>

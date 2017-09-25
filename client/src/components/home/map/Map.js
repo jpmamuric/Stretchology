@@ -7,27 +7,33 @@ import './Map.css';
 
 class MapContainer extends Component {
   componentDidMount(){
-    this.props.getCurrentLocation();
+    this.renderMap()
   }
 
   renderMap(){
     if(!this.props.currentLocation) {
       return <div>loading...</div>
     }
-    const { latitude, longitude } = this.props.currentLocation.coords;
 
-    var latlng = new google.maps.LatLng(latitude, longitude);
-    var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 13,
-          center: latlng
-        });
+    const { latitude, longitude } = this.props.currentLocation.coords;
+    const latlng = new google.maps.LatLng(latitude, longitude);
+
+    new google.maps.Map(document.getElementById('map'), {
+      zoom: 13,
+      center: latlng,
+      mapTypeControl: false,
+      fullscreenControl: false,
+      streetViewControl: false,
+      zoomControl: false
+    });
   }
 
   render(){
-    return <div>
-      {this.renderMap()}
-      <div id='map'/>
-    </div>
+    return (
+      <div>
+        <div id='map'/>
+      </div>
+    )
   }
 }
 
