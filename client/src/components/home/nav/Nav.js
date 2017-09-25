@@ -89,7 +89,7 @@ class Nav extends Component {
   render(){
     // const { credits, googleFirstName } = this.props.user;
     return (
-      <div>
+      <div className='navbar_container'>
         {/* Alternatively can use es6 fat arrow instead of binding to constructor */}
         <NavBar
           title='Stretchology'

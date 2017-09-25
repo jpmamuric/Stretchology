@@ -7,7 +7,7 @@ import './App.css';
 import getMuiTheme          from 'material-ui/styles/getMuiTheme';
 import { blue200 }          from 'material-ui/styles/colors';
 
-import Nav                  from './nav/Nav';
+import Nav                  from './home/nav/Nav';
 
 const muiTheme = getMuiTheme({
   palette: {
