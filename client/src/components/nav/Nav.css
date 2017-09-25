@@ -34,7 +34,14 @@
   padding: 5px 0;
 }
 
-.sidebar_link {
+.sidebar_header_title {
+  cursor: pointer;
+  text-decoration: none;
+  color: #000;
+}
+
+.sidebar_link
+ {
   cursor: pointer;
   margin-left: 25px;
   margin-top: 25px;

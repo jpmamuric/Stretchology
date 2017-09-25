@@ -31,7 +31,9 @@ class Nav extends Component {
         return (
           <div className='sidebar_header flex_me box_shadow'>
             <div className='sidebar_content flex_me'>
-              <div>Stretchology</div>
+              <Link to='/'
+                onClick={this.handleClose}
+                className='sidebar_header_title'>Stretchology</Link>
             </div>
           </div>
         )
@@ -61,7 +63,7 @@ class Nav extends Component {
         return (
           <div className='sidebar_link'>
             <Link
-              className='sidebar_link' to='/' onClick={this.handleClose}>Book a Session
+              className='sidebar_link' to='/booking' onClick={this.handleClose}>Book a Session
             </Link>
             <div className='sidebar_link'>
               <a href='/auth/google'

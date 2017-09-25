@@ -4,15 +4,15 @@ import { Route, IndexRoute } from 'react-router';
 import App from './components/App';
 
 // Pages
-import HomePage             from './components/pages/page_home';
-import SigninPage           from './components/pages/page_signin';
-import BookingNearbyPage    from './components/pages/page_booking_nearby';
+import HomePage             from './pages/page_home';
+import SigninPage           from './pages/page_signin';
+import BookingPage          from './pages/page_booking';
 // import requireAuth          from '../components/hoc/require_authentication';
 
 export default (
   <Route path="/" component={App} >
     <IndexRoute component={HomePage} />
     <Route path="/signin" component={SigninPage}/>
-    <Route path="/booking" component={BookingNearbyPage}/>
+    <Route path='/booking' component={BookingPage}/>
   </Route>
 );
