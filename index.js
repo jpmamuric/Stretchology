@@ -58,22 +58,18 @@ if (process.env.NODE_ENV === 'production') {
 
 io.on("connection", socket => {
   console.log("New client connected");
-  getApiAndEmit(socket)
+  console.log("Socket connected: " + socket.id);
+
+  socket.on('action', action => {
+    if(action.type === 'server/socketId'){
+      socket.emit("action", { type: 'FETCH_SOCKET_ID', payload: socket.id });
+    }
+  });
 
   socket.on("disconnect", () => {
-    console.log("Client disconnected");
+    console.log("Client disconnected: " + socket.id);
   });
 });
 
-const getApiAndEmit = async socket => {
-  const API_KEY = "cdc481c3e6b4cdd71563246c9af9766a";
-  const ROOT_URL = `http://api.openweathermap.org/data/2.5/forecast?appid=${API_KEY}`;
-  try {
-    const res = await axios.get(`${ROOT_URL}&q=pasadena,us`);
-    socket.emit("FromAPI", res.data);
-  } catch (error) {
-    console.error(`Error: ${error.code}`);
-  }
-};
 
 server.listen(PORT, () => console.log(`Listening on port ${PORT}`));

@@ -1,25 +1,18 @@
 import React    from 'react';
-import socketio from "socket.io-client";
+
 import { connect } from 'react-redux';
 
 import * as actions from '../../actions/stretchologist';
 
 class ConfirmAppointment extends React.Component {
-  state = { endpoint: 'http://localhost:3000'}
-
   componentDidMount(){
-    const { endpoint } = this.state;
-    const socket = socketio(endpoint);
-    socket.on('connect', () => {
-
+    const { _id, socketId } = this.props;
       const currentData = {
-        "socketId": socket.id,
-        "stretchologistId": this.props._id
+        "socketId": socketId,
+        "stretchologistId": _id
       }
 
       this.props.updateSocketId(currentData);
-
-    });
   }
 
   render(){
@@ -31,9 +24,10 @@ class ConfirmAppointment extends React.Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => {
+const mapStateToProps = ({ auth, stretchologists }) => {
   const { _id } = auth.user;
-  return { _id };
+  const { socketId } = stretchologists;
+  return { _id, socketId };
 }
 
 export default connect(mapStateToProps, actions)(ConfirmAppointment)

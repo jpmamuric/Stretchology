@@ -2,9 +2,10 @@
 import React, { Component } from 'react';
 import { connect }          from 'react-redux';
 
-import * as actions from '../../../actions/stretchologist';
-import SearchBox    from '../searchbox/SearchBox';
-import markerImg    from '../../../images/marker.png';
+import * as actions  from '../../../actions/stretchologist';
+import SearchBox     from '../searchbox/SearchBox';
+import BookingButton from '../book/BookButton';
+import markerImg     from '../../../images/marker.png';
 import './Map.css';
 
 class MapContainer extends Component {
@@ -63,6 +64,7 @@ class MapContainer extends Component {
         <div ref='map' id='map'/>
         <SearchBox />
         { this.renderMarkers()}
+        <BookingButton />
       </div>
     )
   }

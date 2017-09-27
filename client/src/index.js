@@ -1,24 +1,29 @@
 import React                            from 'react';
 import ReactDOM                         from 'react-dom';
 import { Provider }                     from 'react-redux';
-import { Router, hashHistory }       from 'react-router';
+import { Router, browserHistory }          from 'react-router';
 import { composeWithDevTools }          from 'redux-devtools-extension';
 import { createStore, applyMiddleware } from 'redux';
-import Thunk                            from 'redux-thunk';
+import createSocketIoMiddleware         from 'redux-socket.io';
+import io                               from 'socket.io-client';
+import thunk                            from 'redux-thunk';
 import routes                           from './routes';
 import reducers                         from './reducers'
 import './index.css';
 
+let socket = io('http://localhost:3000');
+let socketIoMiddleware = createSocketIoMiddleware(socket, 'server/');
+
 const store = createStore(
   reducers,
   composeWithDevTools(
-    applyMiddleware(Thunk)
+    applyMiddleware(thunk, socketIoMiddleware)
   )
 );
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={hashHistory} routes={routes}/>
+    <Router history={browserHistory} routes={routes}/>
   </Provider>,
   document.getElementById('root')
 );

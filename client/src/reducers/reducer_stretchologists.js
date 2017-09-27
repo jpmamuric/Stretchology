@@ -2,7 +2,7 @@ import * as types from '../actions/types';
 
 const initialState = {
   socketId: null,
-  nearby: null
+  nearby: null,
 };
 
 export default (state = initialState, action) => {

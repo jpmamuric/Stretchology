@@ -23,3 +23,9 @@ export const findStretchologistNearby = ({ latitude, longitude }) => dispatch =>
     })
     .catch(err => console.log(err));
 }
+
+// stretchologistLocations === [] of locations
+
+export const bookStretchologist = (stretchologistLocations) => dispatch => {
+  const nearbyStretchologist = stretchologistLocations[Math.floor(Math.random() * stretchologistLocations.length )]
+}

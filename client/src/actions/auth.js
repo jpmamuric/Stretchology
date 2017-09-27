@@ -23,3 +23,7 @@ export const getCurrentLocation = () => dispatch => {
       console.error(err.message);
     });
 }
+
+export const fetchSocketId = () => dispatch => {
+  dispatch({ type: 'server/socketId' });
+}
