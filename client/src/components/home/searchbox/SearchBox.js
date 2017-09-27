@@ -16,7 +16,7 @@ class SearchBox extends Component {
 
   render(){
     return (
-      <form className='searchbox_container' onSubmit={e=>this.handleOnSubmit(e)}>
+      <form className='searchbox_container flex_me' onSubmit={e=>this.handleOnSubmit(e)}>
         <div>
           { /* place search icon here later */}
           <input

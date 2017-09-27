@@ -15,3 +15,11 @@ export const updateSocketId = ({ socketId, stretchologistId }) => dispatch => {
       console.log(err)
     });
 }
+
+export const findStretchologistNearby = ({ latitude, longitude }) => dispatch => {
+  axios.get(`/api/stretchologists_nearby?lng=${longitude}&lat=${latitude}`)
+    .then(res => {
+      dispatch({ type: types.FETCH_NEARBY_STRETCHOLOGISTS, payload: res.data })
+    })
+    .catch(err => console.log(err));
+}
