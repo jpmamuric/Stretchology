@@ -27,3 +27,8 @@ export const getCurrentLocation = () => dispatch => {
 export const fetchSocketId = () => dispatch => {
   dispatch({ type: 'server/socketId' });
 }
+
+export const removeSocketId = () => dispatch => {
+  // remove local storage
+  localStorage.removeItem('socketId');
+}

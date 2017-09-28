@@ -1,19 +1,38 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
-const Contractor = ({ user }) => {
-  const { googleDisplayName } = user;
-  return (
-    <div>
-      <h1>{ googleDisplayName }</h1>
-      <div>Contractor Dashboard</div>
-    </div>
-  )
+import * as actions from '../../actions/stretchologist';
+
+class Contractor extends Component {
+  componentDidMount(){
+    const { socketId, user } = this.props;
+    const { _id } = user;
+      const currentData = {
+        "socketId": socketId,
+        "stretchologistId": _id
+      }
+
+      this.props.updateSocketId(currentData);
+
+    // api GET request to server
+      // dispatch bookings list
+  }
+
+  render(){
+    const { googleDisplayName } = this.props.user;
+    return (
+      <div>
+        <h1>{ googleDisplayName }</h1>
+        <div>Contractor Dashboard</div>
+      </div>
+    )
+  }
 }
 
-const mapStateToProps = ({ auth }) => {
+const mapStateToProps = ({ auth, stretchologists }) => {
   const { user } = auth;
-  return { user };
+  const { socketId, requests } = stretchologists;
+  return { user, socketId, requests };
 }
 
-export default connect(mapStateToProps)(Contractor);
+export default connect(mapStateToProps, actions)(Contractor);

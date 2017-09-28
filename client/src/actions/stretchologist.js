@@ -9,6 +9,10 @@ export const updateSocketId = ({ socketId, stretchologistId }) => dispatch => {
   axios.put(`/api/stretchologists_locations/${stretchologistId}`, {socketId} )
     .then( res => {
       console.log('success');
+
+      //save to local storage
+      localStorage.setItem('socketId', socketId);
+
       dispatch({ type: types.UPDATE_SOCKET_ID, payload: res.data });
     })
     .catch(err => {

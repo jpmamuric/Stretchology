@@ -1,22 +1,15 @@
-import React    from 'react';
+import React       from 'react';
 import { connect } from 'react-redux';
-
-import * as actions from '../../actions/stretchologist';
 
 class ConfirmAppointment extends React.Component {
   componentDidMount(){
-    const { _id, socketId } = this.props;
-      const currentData = {
-        "socketId": socketId,
-        "stretchologistId": _id
-      }
 
-      this.props.updateSocketId(currentData);
   }
 
   render(){
     return (
       <div>
+        {/* send notification to contractor */}
         {
           this.props.requests
           ? <div> request from: {this.props.requests.googleDisplayName}</div>
@@ -27,10 +20,9 @@ class ConfirmAppointment extends React.Component {
   }
 }
 
-const mapStateToProps = ({ auth, stretchologists }) => {
-  const { _id } = auth.user;
-  const { socketId, requests } = stretchologists;
-  return { _id, socketId, requests };
+const mapStateToProps = ({ stretchologists }) => {
+  const { requests } = stretchologists;
+  return { requests };
 }
 
-export default connect(mapStateToProps, actions)(ConfirmAppointment)
+export default connect(mapStateToProps)(ConfirmAppointment)

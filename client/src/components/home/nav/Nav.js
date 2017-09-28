@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link }             from 'react-router-dom';
 import { connect }          from 'react-redux';
 
+import * as actions         from '../../../actions/auth';
+
 import './Nav.css';
 import NavBar               from '../custom-mui/Navbar';
 import Drawer               from 'material-ui/Drawer';
@@ -46,7 +48,11 @@ class Nav extends Component {
             </Link>
             <div className='sidebar_content flex_me'>
               <div>{user.googleDisplayName}</div>
-              <div className='sidebar_view_profile'>credits: ${user.credits}.00</div>
+              {
+                user.contractor
+                ? null
+                : <div className='sidebar_view_profile'>credits: ${user.credits}.00</div>
+              }
             </div>
           </div>
         )
@@ -55,7 +61,7 @@ class Nav extends Component {
   }
 
   renderLinks(){
-    const { user } = this.props
+    const { user, removeSocketId } = this.props
     switch (user) {
       case null:
         return <div>loading...</div>
@@ -97,7 +103,7 @@ class Nav extends Component {
             <div onClick={this.handleClose}>
               <StripePayments />
             </div>
-            <div className='sidebar_link'>
+            <div className='sidebar_link' onClick={()=>removeSocketId()}>
               <a href='/api/logout'>Signout</a>
             </div>
           </div>
@@ -138,4 +144,4 @@ const mapStateToProps = ({ auth }) => {
   return { user };
 }
 
-export default connect(mapStateToProps)(Nav);
+export default connect(mapStateToProps, actions)(Nav);
