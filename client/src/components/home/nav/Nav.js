@@ -97,11 +97,14 @@ class Nav extends Component {
                   </Link>
                 )
               }
-
             </div>
 
             <div onClick={this.handleClose}>
-              <StripePayments />
+              {
+                user.contractor
+                ? null
+                : <StripePayments />
+              }
             </div>
             <div className='sidebar_link' onClick={()=>removeSocketId()}>
               <a href='/api/logout'>Signout</a>

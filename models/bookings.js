@@ -8,6 +8,7 @@ const BookingSchema = new Schema({
   longitude: { type: Number, required: true },
   session: { type: String, required: true },
   price: { type: String, required: true  },
+  stretchologistId: { type: String, required: true },
   socketId: { type: String, required: true },
   date: { type: String },
   time: { type: String },

@@ -22,8 +22,10 @@ module.exports = app => {
       const stretchologistId = req.params.id
       const stretchologistProps = req.body;
 
-      StretchologistsLocations.findOneAndUpdate({ StretchologistId: stretchologistId },
-        { $set: { socketId: req.body.socketId }}, { new: true })
+      StretchologistsLocations.findOneAndUpdate(
+        { StretchologistId: stretchologistId },
+        { $set: { socketId: req.body.socketId }},
+        { new: true })
           .then(location => res.status(200).send(location))
           .catch(next);
     }

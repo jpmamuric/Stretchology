@@ -1,16 +1,18 @@
 const mongoose = require('mongoose');
 const Bookings = mongoose.model('bookings');
 
-
 module.exports = (app, io) => {
   app.get('/api/bookings', (req, res, next) => {
     console.log(req.body);
   });
 
   //match booking to contractor socket id
-  app.get('/api/bookings/:bookingsId', (req, res, next) => {
-    const match = req.params.bookingsId
-    res.send(match);
+  app.get('/api/bookings/:stretchologistId', (req, res, next) => {
+    const stretchologistId = req.params.stretchologistId
+
+    Bookings.find({ stretchologistId })
+      .then( bookings => res.status(200).json(bookings))
+      .catch(next);
   });
 
   app.post('/api/bookings', (req, res, next) => {
@@ -28,8 +30,8 @@ module.exports = (app, io) => {
       //match contractor socket id
 
       //send request to contractor
-      io.emit('action', { type: 'FETCH_NEARBY_REQUESTS', payload: requestData });
-      res.status(200).send({ message: 'success' });
+      io.emit('action', { type: 'FETCH_NEARBY_NOTIFICATION', payload: requestData });
+      res.status(200).json({ message: 'success' });
     } else {
       io.emit('action', { type: 'NEARBY_REQUESTS_FAIL', payload: 'no active stretchologists' });
       next();

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 import * as actions from '../../actions/stretchologist';
+import './Contractor.css';
 
 class Contractor extends Component {
   componentDidMount(){
@@ -13,7 +14,7 @@ class Contractor extends Component {
       }
 
       this.props.updateSocketId(currentData);
-
+      this.props.fetchRequestList(_id)
     // api GET request to server
       // dispatch bookings list
   }

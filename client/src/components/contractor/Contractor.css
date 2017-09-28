@@ -1,0 +1,25 @@
+.appointment_container {
+  margin-top: 20px;
+}
+
+.card_container {
+  width: 100%;
+  max-width: 600px;
+  margin: 10px;
+}
+
+.card_item {
+  background-color: #fff;
+  padding: 20px;
+  border-bottom: 5px;
+
+}
+
+.card_status {
+  color: #f4c542;
+}
+
+.card_btn {
+  cursor: pointer;
+  text-align: right;
+}
