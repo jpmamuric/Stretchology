@@ -26,11 +26,15 @@ export const findStretchologistNearby = ({ latitude, longitude }) => dispatch =>
 
 // stretchologistLocations === [] of locations
 
-export const bookStretchologist = (stretchologistLocations) => dispatch => {
-  const nearbyStretchologist = stretchologistLocations[Math.floor(Math.random() * stretchologistLocations.length )]
-  console.log(nearbyStretchologist);
-  console.log(nearbyStretchologist.obj.socketId);
-  console.log(nearbyStretchologist.obj.StretchologistId);
-  console.log(nearbyStretchologist.obj.geometry.coordinates[0], 'longitude')
-  console.log(nearbyStretchologist.obj.geometry.coordinates[1], 'latitude')
+export const bookStretchologist = (stretchologistLocations, user) => dispatch => {
+  const { googleDisplayName } = user;
+  const nearbyStretchologist = stretchologistLocations[Math.floor(Math.random() * stretchologistLocations.length )];
+
+  axios.post(`/api/bookings`, { nearbyStretchologist, googleDisplayName } )
+    .then( res => {
+      console.log('success');
+    })
+    .catch(err => {
+      console.log(err)
+    });
 }

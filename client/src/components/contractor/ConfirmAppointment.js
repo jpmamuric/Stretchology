@@ -1,5 +1,4 @@
 import React    from 'react';
-
 import { connect } from 'react-redux';
 
 import * as actions from '../../actions/stretchologist';
@@ -18,7 +17,11 @@ class ConfirmAppointment extends React.Component {
   render(){
     return (
       <div>
-        Confirmation Test
+        {
+          this.props.requests
+          ? <div> request from: {this.props.requests.googleDisplayName}</div>
+          : <div> No Available Requests </div>
+        }
       </div>
     )
   }
@@ -26,8 +29,8 @@ class ConfirmAppointment extends React.Component {
 
 const mapStateToProps = ({ auth, stretchologists }) => {
   const { _id } = auth.user;
-  const { socketId } = stretchologists;
-  return { _id, socketId };
+  const { socketId, requests } = stretchologists;
+  return { _id, socketId, requests };
 }
 
 export default connect(mapStateToProps, actions)(ConfirmAppointment)

@@ -62,22 +62,25 @@ class Nav extends Component {
       case false:
         return (
           <div className='sidebar_link'>
-            <Link
-              className='sidebar_link' to='/booking' onClick={this.handleClose}>Book a Session
-            </Link>
-            <div className='sidebar_link'>
-              <a href='/auth/google'
-                onClick={this.handleClose}>Signin with Google
-              </a>
-            </div>
+            <a href='/auth/google'
+              onClick={this.handleClose}>Signin with Google
+            </a>
           </div>
         )
       default:
         return (
           <div>
-            <Link
-              className='sidebar_link' to='/booking' onClick={this.handleClose}>Book a Session
-            </Link>
+            <div className='sidebar_link'>
+              {
+                user.contractor
+                ? null
+                : (
+                  <Link
+                     to='/booking' onClick={this.handleClose}>Book a Session
+                  </Link>
+                )
+              }
+            </div>
             <div className='sidebar_link'>
               {
                 !user.contractor

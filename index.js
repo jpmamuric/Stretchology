@@ -40,7 +40,7 @@ require('./routes/index')(app);
 require('./routes/auth_routes')(app);
 require('./routes/billing_routes')(app);
 require('./routes/stretchologists')(app);
-require('./routes/booking_routes')(app);
+require('./routes/booking_routes')(app, io);
 
 // Catch All Error Handler
 app.use((err, req, res, next) => {

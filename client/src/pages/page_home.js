@@ -2,14 +2,14 @@ import React          from 'react';
 import { connect }    from 'react-redux';
 
 import './pages.css';
-import Home from '../components/home/Home';
+import Dashboard from '../components/dashboard/Dashboard';
 
 const HomePage = ({ user }) => {
   return (
     <div className='page_home'>
       {
         user
-        ? <Home />
+        ? <Dashboard />
         : <h1>must be sign in</h1>
       }
     </div>
