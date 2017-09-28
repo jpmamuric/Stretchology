@@ -79,9 +79,16 @@ class Nav extends Component {
               className='sidebar_link' to='/booking' onClick={this.handleClose}>Book a Session
             </Link>
             <div className='sidebar_link'>
-              <Link
-                 to='/confirm' onClick={this.handleClose}>Confirm
-              </Link>
+              {
+                !user.contractor
+                ? null
+                : (
+                  <Link
+                     to='/confirm' onClick={this.handleClose}>Confirm
+                  </Link>
+                )
+              }
+
             </div>
 
             <div onClick={this.handleClose}>

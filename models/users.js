@@ -8,7 +8,8 @@ const userSchema = new Schema({
   googleEmail: String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
-  credits: { type: Number, default: 0 }
+  credits: { type: Number, default: 0 },
+  contractor: { type: Boolean, default: false }
 });
 
 mongoose.model('users', userSchema);

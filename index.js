@@ -13,8 +13,6 @@ const PORT = process.env.PORT || 5000;
 
 // Mongoose Setup
 require('./models/users');
-require('./models/contractors');
-require('./models/stretchologists');
 require('./models/stretchologistsLocations');
 require('./models/bookings');
 require('./services/passport');
@@ -41,7 +39,6 @@ app.use(passport.session());
 require('./routes/index')(app);
 require('./routes/auth_routes')(app);
 require('./routes/billing_routes')(app);
-require('./routes/contractor_routes')(app);
 require('./routes/stretchologists')(app);
 require('./routes/booking_routes')(app);
 
