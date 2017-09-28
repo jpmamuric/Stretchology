@@ -1,15 +1,18 @@
-import React, { Component } from 'react';
-import { connect }          from 'react-redux';
+import React, { Component }     from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+import { connect }              from 'react-redux';
 
+import MuiThemeProvider         from 'material-ui/styles/MuiThemeProvider';
+import Nav                      from './home/nav/Nav';
+import HomePage                 from '../pages/page_home';
+// import SigninPage               from '../pages/page_signin';
+import BookingPage              from '../pages/page_booking';
+import ConfirmAppointmentPage   from '../pages/page_confirm'
 
-import MuiThemeProvider     from 'material-ui/styles/MuiThemeProvider';
-
-import * as actions         from '../actions/auth';
+import * as actions             from '../actions/auth';
 import './App.css';
-import getMuiTheme          from 'material-ui/styles/getMuiTheme';
-import { blue200 }          from 'material-ui/styles/colors';
-
-import Nav                  from './home/nav/Nav';
+import getMuiTheme              from 'material-ui/styles/getMuiTheme';
+import { blue200 }              from 'material-ui/styles/colors';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -30,10 +33,14 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <div>
-          <Nav />
-          {this.props.children}
-        </div>
+          <BrowserRouter>
+            <div>
+              <Nav />
+              <Route exact path='/' component={HomePage}/>
+              <Route exact path='/booking' component={BookingPage}/>
+              <Route exact path="/confirm" component={ConfirmAppointmentPage} />
+            </div>
+          </BrowserRouter>
       </MuiThemeProvider>
     );
   }

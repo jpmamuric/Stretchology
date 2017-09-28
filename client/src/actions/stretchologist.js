@@ -28,4 +28,5 @@ export const findStretchologistNearby = ({ latitude, longitude }) => dispatch =>
 
 export const bookStretchologist = (stretchologistLocations) => dispatch => {
   const nearbyStretchologist = stretchologistLocations[Math.floor(Math.random() * stretchologistLocations.length )]
+  console.log(nearbyStretchologist);
 }

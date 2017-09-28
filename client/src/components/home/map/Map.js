@@ -58,13 +58,21 @@ class MapContainer extends Component {
     }
   }
 
+  renderButton(){
+    if(!this.props.nearby) {
+      return null;
+    } else {
+      return <BookingButton />
+    }
+  }
+
   render(){
     return (
       <div>
         <div ref='map' id='map'/>
         <SearchBox />
         { this.renderMarkers()}
-        <BookingButton />
+        { this.renderButton() }
       </div>
     )
   }

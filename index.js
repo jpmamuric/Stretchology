@@ -16,6 +16,7 @@ require('./models/users');
 require('./models/contractors');
 require('./models/stretchologists');
 require('./models/stretchologistsLocations');
+require('./models/bookings');
 require('./services/passport');
 
 mongoose.Promise = global.Promise;
@@ -42,6 +43,7 @@ require('./routes/auth_routes')(app);
 require('./routes/billing_routes')(app);
 require('./routes/contractor_routes')(app);
 require('./routes/stretchologists')(app);
+require('./routes/booking_routes')(app);
 
 // Catch All Error Handler
 app.use((err, req, res, next) => {
