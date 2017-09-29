@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link }             from 'react-router-dom';
+import { Link }             from 'react-router';
 import { connect }          from 'react-redux';
 
 import * as actions         from '../../../actions/auth';
@@ -35,19 +35,25 @@ class Nav extends Component {
             <div className='sidebar_content flex_me'>
               <Link to='/'
                 onClick={this.handleClose}
-                className='sidebar_header_title'>Stretchology</Link>
+                className='sidebar_header_title'>
+                Stretchology
+              </Link>
             </div>
           </div>
         )
       default:
         return (
           <div className='sidebar_header flex_me box_shadow'>
-            <Link to='/'
-              className='sidebar_img flex_me' onClick={this.handleClose}>
-              <div >IMAGE</div>
-            </Link>
+            <div onClick={this.handleClose} className='sidebar_img flex_me'>
+              <Link to='/'>
+                Image
+              </Link>
+            </div>
+
             <div className='sidebar_content flex_me'>
-              <div>{user.googleDisplayName}</div>
+              <div>
+                {user.googleDisplayName}
+              </div>
               {
                 user.contractor
                 ? null
@@ -82,23 +88,11 @@ class Nav extends Component {
                 ? null
                 : (
                   <Link
-                     to='/booking' onClick={this.handleClose}>Book a Session
+                     to='/bookings' onClick={this.handleClose}>Book a Session
                   </Link>
                 )
               }
             </div>
-            <div className='sidebar_link'>
-              {
-                !user.contractor
-                ? null
-                : (
-                  <Link
-                     to='/confirm' onClick={this.handleClose}>Confirm
-                  </Link>
-                )
-              }
-            </div>
-
             <div onClick={this.handleClose}>
               {
                 user.contractor

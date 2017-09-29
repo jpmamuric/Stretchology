@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 import * as actions from '../../actions/stretchologist';
+import ConfirmAppointment from './ConfirmAppointment';
 import './Contractor.css';
 
 class Contractor extends Component {
   componentDidMount(){
+    console.log('---componentDidMount---')
     const { socketId, user } = this.props;
     const { _id } = user;
       const currentData = {
@@ -25,6 +27,7 @@ class Contractor extends Component {
       <div>
         <h1>{ googleDisplayName }</h1>
         <div>Contractor Dashboard</div>
+        <ConfirmAppointment />
       </div>
     )
   }

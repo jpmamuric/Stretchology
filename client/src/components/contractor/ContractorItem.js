@@ -9,7 +9,7 @@ const ContractorItem = ({ name, address, session, status, _id }) => {
       <div>{address}</div>
       <div>Session: {session}</div>
       <div>Status: <span className='card_status'>{status}</span></div>
-      <div className='card_btn '>Confirm</div>
+      <div className='card_btn ' onClick={()=>console.log('confirmed')}>Confirm</div>
     </div>
   )
 }

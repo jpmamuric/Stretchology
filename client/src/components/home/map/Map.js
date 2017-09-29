@@ -2,10 +2,11 @@
 import React, { Component } from 'react';
 import { connect }          from 'react-redux';
 
-import * as actions  from '../../../actions/stretchologist';
-import SearchBox     from '../searchbox/SearchBox';
-import BookingButton from '../booking/BookingButton';
-import markerImg     from '../../../images/marker.png';
+import * as actions   from '../../../actions/stretchologist';
+import SearchBox      from '../searchbox/SearchBox';
+import BookingButton  from '../booking/BookingButton';
+import BookingPending from '../booking/BookingPending';
+import markerImg      from '../../../images/marker.png';
 import './Map.css';
 
 class MapContainer extends Component {
@@ -67,9 +68,11 @@ class MapContainer extends Component {
   }
 
   render(){
+    const { isPending } = this.props;
     return (
       <div>
         <div ref='map' id='map'/>
+        { isPending ? <BookingPending /> : null }
         <SearchBox />
         { this.renderMarkers()}
         { this.renderButton() }
@@ -78,10 +81,11 @@ class MapContainer extends Component {
   }
 }
 
-const mapStateToProps = ({ location, stretchologists }) => {
+const mapStateToProps = ({ location, stretchologists, bookings }) => {
   const { currentLocation } = location;
   const { nearby } = stretchologists;
-  return { currentLocation , nearby};
+  const { isPending } = bookings;
+  return { currentLocation , nearby, isPending };
 }
 
 export default connect(mapStateToProps, actions)(MapContainer);

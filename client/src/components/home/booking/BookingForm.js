@@ -32,11 +32,11 @@ class BookingForm extends Component {
   }
 
   render(){
-    const { onBookingSubmit, cancelBookingForm } = this.props;
+    const { onBookingSubmit, cancelBooking } = this.props;
     return (
       <form className='booking_form' onSubmit={this.props.handleSubmit(onBookingSubmit) }>
         { this.renderFields() }
-        <button className='' onClick={()=>cancelBookingForm()}>Cancel</button>
+        <button className='' onClick={()=>cancelBooking()}>Cancel</button>
         <button type='submit' className=''>Review</button>
       </form>
     );

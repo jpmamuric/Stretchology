@@ -6,10 +6,10 @@ import { createStore, applyMiddleware } from 'redux';
 import createSocketIoMiddleware         from 'redux-socket.io';
 import io                               from 'socket.io-client';
 import thunk                            from 'redux-thunk';
-import reducers                         from './reducers'
+import { Router, browserHistory }       from 'react-router';
+import reducers                         from './reducers';
+import routes                           from './routes';
 import './index.css';
-
-import App from './components/App';
 
 let socket = io('http://localhost:3000');
 let socketIoMiddleware = createSocketIoMiddleware(socket, 'server/');
@@ -23,7 +23,7 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router history={browserHistory} routes={routes}/>
   </Provider>,
   document.getElementById('root')
 );

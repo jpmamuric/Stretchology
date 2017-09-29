@@ -1,5 +1,6 @@
 .appointment_container {
   margin-top: 20px;
+  flex-direction: column;
 }
 
 .card_container {

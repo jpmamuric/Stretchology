@@ -21,14 +21,14 @@ module.exports = (app, io) => {
     let latitude = geometry.coordinates[1];
     let longitude = geometry.coordinates[0];
     let requestData = {
+      StretchologistId,
       socketId,
       googleDisplayName
     }
 
+    console.log(req.body)
+
     if (socketId) {
-
-      //match contractor socket id
-
       //send request to contractor
       io.emit('action', { type: 'FETCH_NEARBY_NOTIFICATION', payload: requestData });
       res.status(200).json({ message: 'success' });
@@ -42,6 +42,7 @@ module.exports = (app, io) => {
     //     res.send(savedBooking);
     //   })
     //   .catch(next);
+
 
   });
 }

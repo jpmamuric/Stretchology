@@ -1,11 +1,18 @@
 import React          from 'react';
 import { connect }    from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 import * as actions from '../../../actions/bookings';
 import formFields   from './form_fields';
 
-const BookingFormReview = ({ onCancelReview, values, bookStretchologist, history }) => {
+const BookingFormReview = ({
+  user,
+  socketId,
+  nearby,
+  onCancelReview,
+  values,
+  bookStretchologist,
+  history
+}) => {
   const reviewFields = formFields.map((field,i) => {
     return (
       <div key={i}>
@@ -26,18 +33,20 @@ const BookingFormReview = ({ onCancelReview, values, bookStretchologist, history
       </button>
       <button
         className=''
-        onClick={()=>console.log('booking now')}>
+        onClick={()=>bookStretchologist(nearby,user)}>
         Book
       </button>
     </div>
   )
 };
 
-const mapStateToProps = ({ form }) => {
+const mapStateToProps = ({ form, stretchologists, auth }) => {
   const { values } = form.bookingForm;
-  return { values };
+  const { socketId, nearby } = stretchologists;
+  const { user } = auth;
+  return { values, socketId, user, nearby };
 }
 
-export default connect(mapStateToProps, actions)(withRouter(BookingFormReview));
+export default connect(mapStateToProps, actions)(BookingFormReview);
 
 // ()=>bookStretchologist(values, history)
