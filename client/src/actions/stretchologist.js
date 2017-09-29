@@ -43,16 +43,3 @@ export const findStretchologistNearby = ({ latitude, longitude }) => dispatch =>
     })
     .catch(err => console.log(err));
 }
-
-export const bookStretchologist = (stretchologistLocations, user) => dispatch => {
-  const { googleDisplayName } = user;
-  const nearbyStretchologist = stretchologistLocations[Math.floor(Math.random() * stretchologistLocations.length )];
-
-  axios.post(`/api/bookings`, { nearbyStretchologist, googleDisplayName } )
-    .then( res => {
-      console.log('success');
-    })
-    .catch(err => {
-      console.log(err)
-    });
-}

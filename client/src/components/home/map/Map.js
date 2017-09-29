@@ -4,7 +4,7 @@ import { connect }          from 'react-redux';
 
 import * as actions  from '../../../actions/stretchologist';
 import SearchBox     from '../searchbox/SearchBox';
-import BookingButton from '../book/BookButton';
+import BookingButton from '../booking/BookingButton';
 import markerImg     from '../../../images/marker.png';
 import './Map.css';
 
