@@ -32,8 +32,8 @@ class BookingForm extends Component {
 
         {
           nearby.map(item => {
-            const { _id , profile, stretchologistId } = item.obj
-            return <MenuItem  key={_id} value={stretchologistId} primaryText={profile.firstname} />
+            const { _id , profile } = item.obj
+            return <MenuItem  key={_id} value={item.obj} primaryText={profile.firstname} />
           })
         }
         </Field>
@@ -56,6 +56,12 @@ class BookingForm extends Component {
 
 function validate(values) {
   const errors = {};
+  const { stretchologist } = values;
+
+  if(!stretchologist) {
+    errors.stretchologist = 'must select a stretchologist';
+  }
+
   return errors;
 }
 

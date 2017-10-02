@@ -17,7 +17,7 @@ module.exports = (app, io) => {
 
   app.post('/api/bookings', (req, res, next) => {
     const { googleDisplayName } = req.body;
-    const { socketId, stretchologistId, geometry } = req.body.nearbyStretchologist.obj;
+    const { socketId, stretchologistId, geometry } = req.body.stretchologist;
     let latitude = geometry.coordinates[1];
     let longitude = geometry.coordinates[0];
     let requestData = {
@@ -29,8 +29,6 @@ module.exports = (app, io) => {
     console.log(req.body)
     io.emit('action', { type: 'FETCH_NEARBY_NOTIFICATION', payload: requestData });
     res.status(200).json({ message: 'success' });
-
-
 
     // Bookings.create(req.body)
     //   .then(savedBooking => {

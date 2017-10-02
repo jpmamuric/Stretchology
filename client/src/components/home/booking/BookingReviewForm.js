@@ -2,41 +2,38 @@ import React          from 'react';
 import { connect }    from 'react-redux';
 
 import * as actions from '../../../actions/bookings';
+import './Booking.css'
 
 const BookingFormReview = ({
   user,
-  socketId,
-  nearby,
-  onCancelReview,
   values,
+  searchboxLocation,
   bookStretchologist,
+  onCancelReview,
   history
 }) => {
-
+  const { stretchologist } = values;
+  const { firstname, lastname } = stretchologist.profile;
   return (
-    <div >
-      <h5>Please confirm your entries</h5>
-      <button
-        className=''
-        onClick={onCancelReview}>
-        Back
-      </button>
-      <button
-        className=''
-        onClick={()=>bookStretchologist(nearby,user)}>
-        Book
-      </button>
+    <div className='booking_form flex_me'>
+      <div>Please confirm your entries:</div>
+      { searchboxLocation ? <div>{ searchboxLocation }</div> : null }
+      <div> stretchologist: { `${firstname} ${lastname}` }</div>
+      <div className='booking_form_buttons flex_me'>
+        <button className='booking_form_button review' onClick={()=>bookStretchologist(stretchologist,user)}>Book</button>
+        <button className='booking_form_button ' onClick={onCancelReview} >Back</button>
+      </div>
     </div>
   )
 };
 
-const mapStateToProps = ({ form, stretchologists, auth }) => {
+const mapStateToProps = ({ form, auth, location }) => {
   const { values } = form.bookingForm;
-  const { socketId, nearby } = stretchologists;
   const { user } = auth;
-  return { values, socketId, user, nearby };
+  const { searchboxLocation } = location;
+  return { values, user, searchboxLocation };
 }
 
 export default connect(mapStateToProps, actions)(BookingFormReview);
 
-// ()=>bookStretchologist(values, history)
+// REACT ROUTER 4 ()=>bookStretchologist(values, history)

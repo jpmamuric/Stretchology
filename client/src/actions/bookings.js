@@ -2,13 +2,15 @@ import axios      from 'axios';
 import * as types from './types';
 import { browserHistory } from 'react-router';
 
-export const bookStretchologist = (stretchologistLocations, user) => dispatch => {
-  console.log(stretchologistLocations, user)
+export const bookStretchologist = (stretchologist, user) => dispatch => {
+  console.log(stretchologist, user)
   const { googleDisplayName } = user;
-  const nearbyStretchologist = stretchologistLocations[Math.floor(Math.random() * stretchologistLocations.length )];
+
+  // randomize booking selections
+  // const nearbyStretchologist = stretchologistLocations[Math.floor(Math.random() * stretchologistLocations.length )];
 
 
-  axios.post(`/api/bookings`, { nearbyStretchologist, googleDisplayName } )
+  axios.post(`/api/bookings`, { stretchologist, googleDisplayName } )
     .then( res => {
       console.log('success');
       dispatch({ type: types.PENDING_BOOKING });

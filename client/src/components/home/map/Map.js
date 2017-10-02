@@ -72,12 +72,18 @@ class MapContainer extends Component {
     if(!map) {
       return null;
     }
+    const { fetchSearchboxLocation } = this.props;
 
     let searchbox = document.getElementById('searchbox');
 
     let autocomplete = new google.maps.places.Autocomplete(searchbox, {
       componentRestrictions: { country: 'us' }
     });
+
+    let marker = new google.maps.Marker({
+      map: map
+    });
+
 
     autocomplete.bindTo('bounds', map);
     autocomplete.addListener('place_changed', () => {
@@ -91,8 +97,9 @@ class MapContainer extends Component {
         return;
       }
 
-
-      console.log(place.geometry.location)
+      marker.setPosition(place.geometry.location);
+      fetchSearchboxLocation(place.formatted_address)
+      console.log(place)
     });
 
   }

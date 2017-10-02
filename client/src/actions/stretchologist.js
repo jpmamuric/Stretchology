@@ -52,3 +52,7 @@ export const findStretchologistNearby = ({ latitude, longitude }) => dispatch =>
     })
     .catch(err => console.log(err));
 }
+
+export const fetchSearchboxLocation = (address) => dispatch => {
+  dispatch({ type: types.FETCH_SEARCHBOX_LOCATION, payload: address });
+}
