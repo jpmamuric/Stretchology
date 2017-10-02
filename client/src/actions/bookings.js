@@ -18,7 +18,6 @@ export const bookStretchologist = (stretchologistLocations, user) => dispatch =>
     });
 }
 
-
 export const cancelBooking = () => dispatch => {
   dispatch({ type: types.CANCEL_BOOKING });
   browserHistory.push('/bookings')

@@ -7,7 +7,7 @@ import './Contractor.css';
 
 class Contractor extends Component {
   componentDidMount(){
-    const { status, user, fetchRequestList, unfetchRequestList} = this.props;
+    const { status, user, fetchRequestList } = this.props;
     if (status) {
       fetchRequestList(user._id)
     }

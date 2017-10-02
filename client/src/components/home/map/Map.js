@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { connect }          from 'react-redux';
 
 import * as actions   from '../../../actions/stretchologist';
-import SearchBox      from '../searchbox/SearchBox';
 import BookingButton  from '../booking/BookingButton';
 import BookingPending from '../booking/BookingPending';
 import markerImg      from '../../../images/marker.png';
@@ -32,8 +31,10 @@ class MapContainer extends Component {
       streetViewControl: false,
       zoomControl: false
     });
-    
+
+
     this.setState({ map })
+    this.renderSearchbox(map)
   }
 
   renderMarkers(){
@@ -67,13 +68,44 @@ class MapContainer extends Component {
     }
   }
 
+  renderSearchbox(map){
+    if(!map) {
+      return null;
+    }
+
+    let searchbox = document.getElementById('searchbox');
+
+    let autocomplete = new google.maps.places.Autocomplete(searchbox, {
+      componentRestrictions: { country: 'us' }
+    });
+
+    autocomplete.bindTo('bounds', map);
+    autocomplete.addListener('place_changed', () => {
+      let place = autocomplete.getPlace();
+      if (!place.geometry) {
+        return;
+      }
+      if (place.geometry.viewport) {
+        map.fitBounds(place.geometry.viewport);
+      } else {
+        return;
+      }
+
+
+      console.log(place.geometry.location)
+    });
+
+  }
+
   render(){
     const { isPending } = this.props;
     return (
       <div>
         <div ref='map' id='map'/>
+        <div className='searchbox_container flex_me'>
+          <input id='searchbox' ref='input' className='searchbox_input'/>
+        </div>
         { isPending ? <BookingPending /> : null }
-        <SearchBox />
         { this.renderMarkers()}
         { this.renderButton() }
       </div>
