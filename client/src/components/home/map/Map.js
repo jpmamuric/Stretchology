@@ -32,7 +32,7 @@ class MapContainer extends Component {
       streetViewControl: false,
       zoomControl: false
     });
-
+    
     this.setState({ map })
   }
 

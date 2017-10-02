@@ -1,27 +1,35 @@
-import React       from 'react';
+import React, { Component }   from 'react';
 import { connect } from 'react-redux';
 
 import * as actions from '../../actions/stretchologist';
 import ContractorItem from './ContractorItem';
 
 
-class ConfirmAppointment extends React.Component {
+class ConfirmAppointment extends Component {
+  renderRequestItems(){
+    const { requests } = this.props;
+    if( requests.length === 0 ) {
+      return <div> no available requests :(  </div>;
+    }
+
+    return requests.map(request => {
+      const { _id } = request;
+      return <ContractorItem key={_id} {...request}/>
+    });
+  }
+
   renderRequestList(){
     const { requests } = this.props;
+
     switch (requests) {
       case null:
         return <div>loading...</div>;
       case false:
-        return <div> no available requests :( </div>;
+        return <div> Lets get started! please activate now</div>;
       default:
         return (
           <div className='card_container box_shadow'>
-            {
-              requests.map(request => {
-                const { _id } = request;
-                return <ContractorItem key={_id} {...request}/>
-              })
-            }
+            { this.renderRequestItems() }
           </div>
         )
     }

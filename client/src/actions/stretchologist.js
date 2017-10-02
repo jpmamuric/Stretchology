@@ -4,10 +4,6 @@ import * as types from './types';
 /********************
 CONTRACTOR
 *********************/
-export const getSocketId = (id) => dispatch => {
-  dispatch({ type: types.FETCH_SOCKET_ID, payload: id });
-};
-
 export const updateSocketId = ({ socketId, stretchologistId }) => dispatch => {
   axios.put(`/api/stretchologists_locations/${stretchologistId}`, {socketId} )
     .then( res => {
@@ -16,7 +12,7 @@ export const updateSocketId = ({ socketId, stretchologistId }) => dispatch => {
       //save to local storage
       localStorage.setItem('socketId', socketId);
 
-      dispatch({ type: types.UPDATE_SOCKET_ID, payload: res.data });
+      // dispatch({ type: types.UPDATE_SOCKET_ID, payload: res.data });
     })
     .catch(err => {
       console.log(err)
@@ -31,6 +27,19 @@ export const fetchRequestList = (stretchologistId) => dispatch => {
     .catch(err => {
       console.log(err)
     });
+}
+
+export const unfetchRequestList = () => dispatch => {
+  dispatch({ type: types.UNFETCH_NEARBY_REQUESTS });
+}
+
+export const activateStretchologist = () => dispatch => {
+  dispatch({ type: types.STRETCHOLOGIST_STATUS_ACTIVE });
+}
+
+export const unActivateStretchologist = () => dispatch => {
+  localStorage.removeItem('socketId');
+  dispatch({ type: types.STRETCHOLOGIST_STATUS_INACTIVE });
 }
 
 /********************

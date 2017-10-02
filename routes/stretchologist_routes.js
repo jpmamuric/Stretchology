@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
-const StretchologistsLocations = mongoose.model('stretchologistsLocations');
+const Stretchologist = mongoose.model('stretchologists');
 
 
 module.exports = app => {
 
   // Create stretchologist generate location
-  app.post('/api/stretchologists_locations' , (req, res, next) => {
-    StretchologistsLocations.create(req.body)
+  app.post('/api/stretchologists' , (req, res, next) => {
+    Stretchologist.create(req.body)
     .then(location => {
       res.status(200).send(location);
     })
@@ -15,15 +15,14 @@ module.exports = app => {
 
   // Update stretchologist location
   app.put('/api/stretchologists_locations/:id', (req, res, next) => {
-    const io = req.app.io;
     if(!req.body){
       res.status(400).send({ error: 'bad data'})
     } else {
       const stretchologistId = req.params.id
       const stretchologistProps = req.body;
 
-      StretchologistsLocations.findOneAndUpdate(
-        { StretchologistId: stretchologistId },
+      Stretchologist.findOneAndUpdate(
+        { stretchologistId: stretchologistId },
         { $set: { socketId: req.body.socketId }},
         { new: true })
           .then(location => res.status(200).send(location))
@@ -34,7 +33,7 @@ module.exports = app => {
   // GET nearby stretchologists
   app.get('/api/stretchologists_nearby', (req, res, next) => {
     const { lng, lat } = req.query;
-    StretchologistsLocations.geoNear({
+    Stretchologist.geoNear({
       type: 'Point' ,
       coordinates: [ parseFloat(lng), parseFloat(lat) ]
     },
@@ -45,7 +44,7 @@ module.exports = app => {
 
   // GET All stretchologists locations
   app.get('/api/stretchologists_locations', (req, res, next) => {
-    StretchologistsLocations.find({})
+    Stretchologist.find({})
     .then(locations => res.status(200).send(locations))
     .catch(next);
   });

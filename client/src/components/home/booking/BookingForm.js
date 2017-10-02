@@ -2,42 +2,53 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect }          from 'react-redux';
 
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+
 import * as actions         from '../../../actions/bookings';
-import formFields           from './form_fields';
 import './Booking.css';
 
-const BookingField = ({ input, label, meta: { error, touched } }) => {
+const BookingField = ({ input, label, children,  meta: { error, touched } }) => {
   return (
-    <div>
-      <label>{label}</label>
-      <input {...input} style={{ marginBottom: 5 }} placeholder={ error }/>
-
-    </div>
+    <SelectField
+    floatingLabelText={label}
+    errorText={touched && error}
+    {...input}
+    onChange={(event, index, value) => input.onChange(value)}
+    children={children}
+    />
   )
 }
 
-const FIELDS = formFields;
-
 class BookingForm extends Component {
-  renderFields(){
-    return FIELDS.map((field, i) => {
-      return <Field
-        type='text'
-        key={i}
-        name={field.name}
-        label={field.label}
-        component={BookingField}
-      />
-    });
+  renderField(){
+    const { nearby } = this.props;
+    return(
+      <Field
+          name="stretchologist"
+          component={BookingField}
+          label="select stretchologist"
+        >
+
+        {
+          nearby.map(item => {
+            const { _id , profile, stretchologistId } = item.obj
+            return <MenuItem  key={_id} value={stretchologistId} primaryText={profile.firstname} />
+          })
+        }
+        </Field>
+    )
   }
 
   render(){
     const { onBookingSubmit, cancelBooking } = this.props;
     return (
-      <form className='booking_form' onSubmit={this.props.handleSubmit(onBookingSubmit) }>
-        { this.renderFields() }
-        <button className='' onClick={()=>cancelBooking()}>Cancel</button>
-        <button type='submit' className=''>Review</button>
+      <form className='booking_form flex_me' onSubmit={this.props.handleSubmit(onBookingSubmit) }>
+        <div>{ this.renderField() }</div>
+        <div className='booking_form_buttons flex_me'>
+          <button className='booking_form_button review' type='submit'>Review</button>
+          <button className='booking_form_button' onClick={()=>cancelBooking()}>Cancel</button>
+        </div>
       </form>
     );
   }
@@ -45,17 +56,15 @@ class BookingForm extends Component {
 
 function validate(values) {
   const errors = {};
-
-  FIELDS.forEach( ({ name, noValueError }) => {
-    if(!values[name]) {
-      errors[name] = noValueError
-    };
-  });
-
   return errors;
 }
 
-export default connect(null, actions)(reduxForm({
+const mapStateToProps = ({ stretchologists }) => {
+  const { nearby } = stretchologists;
+  return { nearby };
+}
+
+export default connect(mapStateToProps, actions)(reduxForm({
   validate,
   form: 'bookingForm',
   destroyOnUnmount: false

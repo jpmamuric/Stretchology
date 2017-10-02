@@ -9,6 +9,7 @@ import thunk                            from 'redux-thunk';
 import { Router, browserHistory }       from 'react-router';
 import reducers                         from './reducers';
 import routes                           from './routes';
+import * as types                       from './actions/types';
 import './index.css';
 
 let socket = io('http://localhost:3000');
@@ -20,6 +21,12 @@ const store = createStore(
     applyMiddleware(thunk, socketIoMiddleware)
   )
 );
+
+const socketId = localStorage.getItem('socketId');
+
+if (socketId) {
+  store.dispatch( {type: types.STRETCHOLOGIST_STATUS_ACTIVE });
+}
 
 ReactDOM.render(
   <Provider store={store}>
