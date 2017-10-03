@@ -20,7 +20,7 @@ const BookingFormReview = ({
       { searchboxLocation ? <div>{ searchboxLocation }</div> : null }
       <div> stretchologist: { `${firstname} ${lastname}` }</div>
       <div className='booking_form_buttons flex_me'>
-        <button className='booking_form_button review' onClick={()=>bookStretchologist(stretchologist,user)}>Book</button>
+        <button className='booking_form_button review' onClick={()=>bookStretchologist(stretchologist, searchboxLocation, user)}>Book</button>
         <button className='booking_form_button ' onClick={onCancelReview} >Back</button>
       </div>
     </div>

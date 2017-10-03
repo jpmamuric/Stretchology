@@ -56,3 +56,8 @@ export const findStretchologistNearby = ({ latitude, longitude }) => dispatch =>
 export const fetchSearchboxLocation = (address) => dispatch => {
   dispatch({ type: types.FETCH_SEARCHBOX_LOCATION, payload: address });
 }
+
+export const fetchUser = () => async dispatch => {
+  const res = await axios.get('/api/current_user');
+  dispatch({ type: types.FETCH_USER, payload: res.data });
+};

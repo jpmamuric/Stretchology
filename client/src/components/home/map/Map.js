@@ -13,6 +13,11 @@ class MapContainer extends Component {
 
   componentDidMount(){
     this.renderMap();
+    this.props.fetchUser()
+  }
+
+  componentWillReceiveProps(nextProps){
+    nextProps.fetchUser()
   }
 
   renderCenter(){
@@ -77,7 +82,8 @@ class MapContainer extends Component {
     let searchbox = document.getElementById('searchbox');
 
     let autocomplete = new google.maps.places.Autocomplete(searchbox, {
-      componentRestrictions: { country: 'us' }
+      componentRestrictions: { country: 'us' },
+      types: ['geocode']
     });
 
     let marker = new google.maps.Marker({
@@ -104,15 +110,16 @@ class MapContainer extends Component {
 
   }
 
+
   render(){
-    const { isPending } = this.props;
+    const { isPending, isBooking} = this.props;
     return (
       <div>
         <div ref='map' id='map'/>
         <div className='searchbox_container flex_me'>
-          <input id='searchbox' ref='input' className='searchbox_input'/>
+          <input id='searchbox' ref='input' className='searchbox_input' />
         </div>
-        { isPending ? <BookingPending /> : null }
+        { isBooking || isPending ? <BookingPending /> : null }
         { this.renderMarkers()}
         { this.renderButton() }
       </div>
@@ -124,7 +131,7 @@ const mapStateToProps = ({ location, stretchologists, bookings }) => {
   const { currentLocation } = location;
   const { nearby } = stretchologists;
   const { isPending } = bookings;
-  return { currentLocation , nearby, isPending };
+  return { currentLocation , nearby, isPending};
 }
 
 export default connect(mapStateToProps, actions)(MapContainer);

@@ -9,7 +9,8 @@ const userSchema = new Schema({
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
   credits: { type: Number, default: 0 },
-  contractor: { type: Boolean, default: false }
+  contractor: { type: Boolean, default: false },
+  isBooking: { type: Boolean, default: false }
 });
 
 mongoose.model('users', userSchema);
